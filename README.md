@@ -1,0 +1,2 @@
+# seminar
+programování na GJS
