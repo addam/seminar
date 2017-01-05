@@ -23,24 +23,19 @@ var stav;
 function robot_krok(x, y, cx, cy, zdi, teren)
 {
 	function najdi_pomalu(x, y, vzdalenost) {
-		var k = x + "," + y + "," + vzdalenost;
-		if (stav[k] === undefined) {
-			if (x == cx && y == cy) {
-				stav[k] = true;
-			} else {
-				stav[k] = false;
-			}
-			if (vzdalenost > 0) {
-				var px = [0, -1, 0, 1], py = [-1, 0, 1, 0];
-				for (var i=0; i<4; i++) {
-					var nx = x + px[i], ny = y + py[i];
-					if (!teren(nx, ny) && najdi(nx, ny, vzdalenost-1) !== false) {
-						stav[k] = i;
-					}
-				}
+		if (x == cx && y == cy) {
+			return true;
+		} else if (vzdalenost == 0) {
+			return false;
+		}
+		var px = [0, -1, 0, 1], py = [-1, 0, 1, 0];
+		for (var i=0; i<4; i++) {
+			var nx = x + px[i], ny = y + py[i];
+			if (!teren(nx, ny) && najdi(nx, ny, vzdalenost-1) !== false) {
+				return i;
 			}
 		}
-		return stav[k];
+		return false;
 	}
 	
 	function najdi(x, y, vzdalenost) {
