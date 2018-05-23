@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Expires" content="0">
+	<link rel="stylesheet" href="base.css">
+	<title>Kroužek programování</title>
+</head>
+<h1>Překážková dráha</h1>
+<button id=tlacitko>pauza</button><br>
+<canvas id=c width=800 height=800></canvas>
+<script>
+var ctx = c.getContext("2d");
+var mrizka = 50;
+var kostky = [];
+function kresli(x, y) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
+}
+function fyzika() {
+    for (var k of kostky) {
+        k.y += 1;
+    }
+    kostky = kostky.filter((k) => (k.y * mrizka <= c.height));
+    if (Math.random() > 0.5) {
+        kostky.push({x: Math.round(Math.random() * 8), y: 0});
+    }
+}
+function zobrazeni() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (var k of kostky) {
+        kresli(k.x, k.y);
+    }
+}
+function cyklus() {
+    fyzika();
+    zobrazeni();
+}
+function pauza() {
+    if (spusteno) {
+        window.clearInterval(spusteno);
+        spusteno = false;
+    } else {
+        spusteno = window.setInterval(cyklus, 200);
+    }
+}
+var spusteno = window.setInterval(cyklus, 200);
+tlacitko.onclick = pauza;
+</script>
+</html>
