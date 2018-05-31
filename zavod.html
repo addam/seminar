@@ -20,6 +20,9 @@ function kresli(x, y) {
 function fyzika() {
     for (var k of kostky) {
         k.y += 1;
+		if (Math.random() > 0.5)
+		k.x += 0.7;
+		else k.x -=0.7;
     }
     kostky = kostky.filter((k) => (k.y * mrizka <= c.height));
     if (Math.random() > 0.5) {
