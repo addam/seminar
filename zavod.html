@@ -12,6 +12,7 @@
 <script>
 var ctx = c.getContext("2d");
 var mrizka = 50;
+var xa = 5;
 var kostky = [];
 function kresli(x, y) {
     ctx.fillStyle = "black";
@@ -35,7 +36,7 @@ function zobrazeni() {
     for (var k of kostky) {
         kresli(k.x, k.y);
     }
-	kresliAuto(5, 15);
+	kresliAuto(xa, 15);
 }
 function cyklus() {
     fyzika();
@@ -49,7 +50,17 @@ function pauza() {
         spusteno = window.setInterval(cyklus, 200);
     }
 }
+
 var spusteno = window.setInterval(cyklus, 200);
+function keydown(event)
+{
+	if (event.key == "ArrowLeft")
+	xa -= 1;
+	if (event.key == "ArrowRight")
+	xa += 1;
+	}
 tlacitko.onclick = pauza;
+window.onkeydown = keydown;
+
 </script>
 </html>
