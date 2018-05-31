@@ -17,6 +17,10 @@ function kresli(x, y) {
     ctx.fillStyle = "black";
     ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
 }
+function kresliAuto(x, y) {
+    ctx.fillStyle = "red";
+    ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
+}
 function fyzika() {
     for (var k of kostky) {
         k.y += 1;
@@ -34,6 +38,7 @@ function zobrazeni() {
     for (var k of kostky) {
         kresli(k.x, k.y);
     }
+	kresliAuto(5, 15);
 }
 
 function cyklus() {
