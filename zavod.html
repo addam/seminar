@@ -58,7 +58,12 @@ function keydown(event)
 	xa -= 1;
 	if (event.key == "ArrowRight")
 	xa += 1;
+	if (xa < 0)
+  xa += 1;
+	if (xa > 8)
+  xa -= 1;
 	}
+
 tlacitko.onclick = pauza;
 window.onkeydown = keydown;
 
