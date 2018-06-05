@@ -11,7 +11,7 @@
 <canvas id=c width=800 height=800></canvas>
 <script>
 var ctx = c.getContext("2d");
-var mrizka = 50;
+var mrizka = 25;
 var kostky = [];
 function kresli(x, y) {
     ctx.fillStyle = "black";
@@ -19,10 +19,10 @@ function kresli(x, y) {
 }
 function fyzika() {
     for (var k of kostky) {
-        k.y += 1;
+        k.y += 0.5;
 		if (Math.random() > 0.5)
-		k.x += 0.7;
-		else k.x -=0.7;
+		k.x += 0.5;
+		else k.x -=0.5;
     }
     kostky = kostky.filter((k) => (k.y * mrizka <= c.height));
     if (Math.random() > 0.5) {
