@@ -8,12 +8,15 @@
 </head>
 <h1>Překážková dráha</h1>
 <button id=tlacitko>pauza</button><br>
+
 <canvas id=c width=800 height=800></canvas>
+<span>Počet bodů: <span id=bod></span></span>
 <script>
 var ctx = c.getContext("2d");
 var mrizka = 50;
 var xa = 5;
 var kostky = [];
+var b = 0;
 function kresli(x, y) {
     ctx.fillStyle = "black";
     ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
@@ -35,7 +38,11 @@ function zobrazeni() {
     ctx.clearRect(0, 0, c.width, c.height);
     for (var k of kostky) {
         kresli(k.x, k.y);
+				if (k.x == xa && k.y == 15) {
+					b += 1;
+				}
     }
+	bod.innerHTML=b;
 	kresliAuto(xa, 15);
 }
 function cyklus() {
