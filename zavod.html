@@ -21,6 +21,14 @@ function kresli(x, y) {
     ctx.fillStyle = "black";
     ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
 }
+function kresliO(x, y) {
+    ctx.fillStyle = "orange";
+    ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
+}
+function kresliD(x, y) {
+    ctx.fillStyle = "green";
+    ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
+}
 function kresliAuto(x, y) {
     ctx.fillStyle = "red";
     ctx.fillRect(x * mrizka, y * mrizka, mrizka, mrizka);
@@ -28,18 +36,36 @@ function kresliAuto(x, y) {
 function fyzika() {
     for (var k of kostky) {
         k.y += 1;
+
     }
-    kostky = kostky.filter((k) => (k.y * mrizka <= c.height));
-    if (Math.random() > 0.5) {
-        kostky.push({x: Math.round(Math.random() * 8), y: 0});
+		var funf = (k) => (k.y * mrizka <= c.height);
+		kostky = kostky.filter(funf);
+    if (Math.random() < 0.5) {
+			var novy_typ;
+			if (Math.random() < 0.1) {
+				novy_typ = 5;
+			}else if (Math.random() < 0.3) {
+				novy_typ = 1;
+			}else {
+				novy_typ = -5;
+			}
+        kostky.push({x: Math.round(Math.random() * 8), y: 0, t: novy_typ});
     }
 }
 function zobrazeni() {
     ctx.clearRect(0, 0, c.width, c.height);
     for (var k of kostky) {
-        kresli(k.x, k.y);
+			if (k.t == -5){
+				kresli(k.x, k.y); //60
+			}else if (k.t == 1) {
+				kresliO(k.x, k.y); //30
+			}else if (k.t == 5) {
+				kresliD(k.x, k.y)	; //10
+				}
+
+
 				if (k.x == xa && k.y == 15) {
-					b += 1;
+					b += k.t;
 				}
     }
 	bod.innerHTML=b;
@@ -62,13 +88,13 @@ var spusteno = window.setInterval(cyklus, 200);
 function keydown(event)
 {
 	if (event.key == "ArrowLeft")
-	xa -= 1;
+	 xa -= 1;
 	if (event.key == "ArrowRight")
-	xa += 1;
+	 xa += 1;
 	if (xa < 0)
-  xa += 1;
+   xa += 1;
 	if (xa > 8)
-  xa -= 1;
+   xa -= 1;
 	}
 
 tlacitko.onclick = pauza;
